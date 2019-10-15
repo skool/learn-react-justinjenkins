@@ -4,9 +4,11 @@ import Dice from '../Dice/Dice';
 
 const CardRow = props => {
 
+    //const optionalDice = <Dice style={{lineHeight: '15px', height: '25px'}}
     return (    
-        <tr>
-        <th style={{width: '50px'}}><span style={{width: '55px', display: 'inline-block'}}>{props.name}</span> <Dice style={{lineHeight: '15px', height: '25px'}} number={props.number} /></th>
+        <tr style={props.style}>
+        <th style={{width: '50px'}}><span style={{width: '55px', display: 'inline-block'}}>{props.name}</span> 
+        {props.number ? <Dice style={{lineHeight: '15px', height: '25px'}} number={props.number} /> : ""} </th>
         <td style={{fontSize: "12px"}}>Count and Add only {props.name}</td>
         <td style={{textAlign: "center"}} onClick={() => props.setSlot(props.number)}>{props.score}</td>
         <td style={{textAlign: "center"}}></td>
@@ -18,9 +20,15 @@ const CardRow = props => {
 
 CardRow.propTypes = {
     name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
+    number: PropTypes.number,
+    combo: PropTypes.string,
     score: PropTypes.number,
     setSlot: PropTypes.func.isRequired,
+    style: PropTypes.object,
+}
+
+CardRow.defaultProps = {
+    style: {}
 }
 
 export default CardRow;

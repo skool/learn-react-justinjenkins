@@ -11,21 +11,43 @@ const Card = props => {
 
     // useReducer ?
     const [card, setCard] = useState({
-        "1": { score: null, region: "top" },
-        "2": { score: null, region: "top" },
-        "3": { score: null, region: "top" },
-        "4": { score: null, region: "top" },
-        "5": { score: null, region: "top" },
-        "6": { score: null, region: "top" },
+        "1": { 
+            name: "Aces", number: 1, score: null, region: "top" },
+        "2": { 
+            name: "Deuces", number: 2, score: null, region: "top" },
+        "3": { 
+            name: "Threes", number: 3, score: null, region: "top" },
+        "4": { 
+            name: "Fours", number: 4, score: null, region: "top" },
+        "5": { 
+            name: "Fives", number: 5, score: null, region: "top" },
+        "6": { 
+            name: "Sixes", number: 6, score: null, region: "top"
+        },
         "totalTopRows": { score: null },
-        "three_of_a_kind": { score: null, region: "bottom" },
-        "four_of_a_kind": { score: null, region: "bottom" },
-        "full_house": { score: null, region: "bottom" },
-        "small_straight": { score: null, region: "bottom" },
-        "large_straight": { score: null, region: "bottom" },
-        "yahtzee": { score: null, region: "bottom" },
-        "chance": { score: null, region: "bottom" },
+        "three_of_a_kind": { 
+            name: "Three of a kind", combo: "three_of_a_kind", score: null, region: "bottom"
+        },
+        "four_of_a_kind": { 
+            name: "Four of a kind", combo: "four_of_a_kind", score: null, region: "bottom"
+        },
+        "full_house": { 
+            name: "Full House", combo: "full_house", score: null, region: "bottom"
+        },
+        "small_straight": { 
+            name: "Small Straight", combo: "small_straight", score: null, region: "bottom"
+        },
+        "large_straight": { 
+            name: "Large Straight", combo: "large_straight", score: null, region: "bottom"
+        },
+        "yahtzee": { 
+            name: "Yahtzee", combo: "yahtzee", score: null, region: "bottom"
+        },
+        "chance": { 
+            name: "Chance", combo: "chance", score: null, region: "bottom"
+        },
         "totalBottomRows": { score: null },
+        "totalGrand": { score: null },
     });
 
     const isRegionSlotsFull = (region) => {
@@ -33,7 +55,8 @@ const Card = props => {
     };
 
     const getRegionSlots = (region) => {
-        return Object.values(card).filter(slot => slot.region === region && slot.score);
+        //return Object.values(card).filter(slot => slot.region === region && slot.score);
+        return Object.values(card).filter(slot => slot.region === region);
     };
 
     useEffect(() => {
@@ -76,6 +99,9 @@ const Card = props => {
         return combinations.determinePoints("number", dice, section);
     }
 
+    const topSlots = Object.values(getRegionSlots("top"));
+    const bottomSlots = Object.values(getRegionSlots("bottom"));
+    
     return (
     <div id="card">
         <h2>My Card</h2>
@@ -91,19 +117,34 @@ const Card = props => {
                 </tr>
             </thead>
             <tbody>
-            <CardRow name="Aces" number={1} score={card[1].score} setSlot={setSlot} />
-            <CardRow name="Deuces" number={2} score={card[2].score} setSlot={setSlot} />
-            <CardRow name="Threes" number={3} score={card[3].score} setSlot={setSlot} />
-            <CardRow name="Fours" number={4} score={card[4].score} setSlot={setSlot} />
-            <CardRow name="Fives" number={5} score={card[5].score} setSlot={setSlot} />
-            <CardRow name="Sixes" number={6} score={card[6].score} setSlot={setSlot} />
+            {topSlots.map(slot => {
+                return <CardRow key={slot.name} name={slot.name} number={slot.number} score={card[slot.number].score} setSlot={setSlot} />
+            })}
             <tr>
-                <th style={{textTransform:'uppercase', width: '200px'}}>Total Score</th>
+                <th style={{textTransform:'uppercase', width: '200px'}}>Upper Total Score</th>
                 <td> -></td>
                 <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalTopRows.score}</td>
                 <td></td>
                 <td></td>
             </tr>
+            {bottomSlots.map(slot => {
+                return <CardRow style={{opacity: '.25'}} key={slot.name} name={slot.name} combo={slot.combo} score={card[slot.combo].score} setSlot={setSlot} />
+            })}
+            <tr>
+                <th style={{textTransform:'uppercase', width: '200px'}}>Lower Total Score</th>
+                <td> -></td>
+                <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalBottomRows.score}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th style={{textTransform:'uppercase', width: '200px'}}>Grand Total</th>
+                <td> -></td>
+                <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalGrand.score}</td>
+                <td></td>
+                <td></td>
+            </tr>
+
             </tbody>
         </Table>
 
