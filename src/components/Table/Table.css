@@ -1,0 +1,13 @@
+#table {
+    background-color: rgb(38, 38, 46);
+    color: white;
+    height: 2000px;
+    width: 100%;
+    text-align: center;
+    padding-top: 50px;
+}
+
+#dice-row {
+    width: 70%;
+    margin: auto;
+}

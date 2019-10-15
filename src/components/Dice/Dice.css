@@ -1,0 +1,25 @@
+.dice {
+    color: black;
+    height: auto; 
+    width: 15%; 
+    display: inline-block; 
+    margin: .25em;
+    line-height: 150px;
+    font-family: monospace;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.dice.frozen {
+    opacity: 0.5;
+}
+
+.dice svg {
+    width: 100% !important;
+    height: 100%;        
+}
+
+#dice-row .dice svg {
+    filter: invert(100%);
+}
