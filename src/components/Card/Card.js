@@ -70,7 +70,7 @@ const Card = props => {
 
     const addUpSlots = (region) => {
         const slots = getRegionSlots(region);
-        const add = (total,slot) => total.score ? total.score+slot.score : total+slot.score;            
+        const add = (total,slot) => !isNaN(total.score) ? total.score+slot.score : total+slot.score;            
         const total = slots.reduce(add);
         return total;
     };
@@ -101,7 +101,7 @@ const Card = props => {
 
     const topSlots = Object.values(getRegionSlots("top"));
     const bottomSlots = Object.values(getRegionSlots("bottom"));
-    
+
     return (
     <div id="card">
         <h2>My Card</h2>
