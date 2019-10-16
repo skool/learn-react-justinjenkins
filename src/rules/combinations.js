@@ -80,6 +80,21 @@ const getMatches = (dice, min) => {
 
 }
 
+const getUniques = (dice) => {
+
+    dice.sort();
+
+    const diceGrouped = groupDice(dice);
+
+    const uniques = diceGrouped.filter((d) => {
+        if (d.count>1) { return false; }
+        return true;
+    });
+
+   return uniques;
+
+}
+
 const groupDice = (dice) => {
 
     dice.sort();
@@ -130,10 +145,23 @@ const fullHouse = (dice) => {
     return false;
 }
 
+const isConsecutive = numbers => {
+    numbers.sort();
+
+    const isOneLarger = (n,i,a) => {
+        return i === 0 || n === a[i-1]+1;
+    };
+
+    return !numbers.map(isOneLarger).some(el => el === false);
+}
+
 const straight = (dice, number) => {
     
     if (number === 5 && !ofAKind(dice,2)) { return true; }
-    if (number === 4 && !ofAKind(dice,3)) { return true; }
+    if (number === 4 && !ofAKind(dice,3) && getMatches(dice).length <= 1) { 
+        const uniqueDice = getUniques(dice).map(dice => dice.id);
+        return isConsecutive(uniqueDice);
+    }
 
     return false;
 }

@@ -40,6 +40,11 @@ it('🎲  small', () => {
   expect(small_straight).toBe(30);
 });
 
+it('🎲  NOT small', () => {
+  const small_straight = determinePoints("small_straight", [1,2,4,4,6]);
+  expect(small_straight).toBe(0);
+});
+
 it('🎲  large', () => {
   const large_straight = determinePoints("large_straight", [1,2,3,4,5]);
   expect(large_straight).toBe(40);
