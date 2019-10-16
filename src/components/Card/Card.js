@@ -55,7 +55,6 @@ const Card = props => {
     };
 
     const getRegionSlots = (region) => {
-        //return Object.values(card).filter(slot => slot.region === region && slot.score);
         return Object.values(card).filter(slot => slot.region === region);
     };
 
@@ -66,6 +65,11 @@ const Card = props => {
         if (isRegionSlotsFull("bottom")) {
             setSlot("totalBottomRows", addUpSlots("bottom"));
         }
+
+        if (card.totalTopRows.score && card.totalBottomRows.score) {
+            setSlot("totalGrand", card.totalTopRows.score+card.totalBottomRows.score);
+        }
+
     });
 
     const addUpSlots = (region) => {
@@ -93,10 +97,9 @@ const Card = props => {
         }
     }
 
-    const getScore = (section) => {
+    const getScore = (slot) => {
         const dice = diceSet(props.diceOnTable);
-        // only supports number right now
-        return combinations.determinePoints("number", dice, section);
+        return isNaN(slot) ? combinations.determinePoints(slot, dice) : combinations.determinePoints("number", dice, slot);
     }
 
     const topSlots = Object.values(getRegionSlots("top"));
@@ -128,7 +131,7 @@ const Card = props => {
                 <td></td>
             </tr>
             {bottomSlots.map(slot => {
-                return <CardRow style={{opacity: '.25'}} key={slot.name} name={slot.name} combo={slot.combo} score={card[slot.combo].score} setSlot={setSlot} />
+                return <CardRow key={slot.name} name={slot.name} combo={slot.combo} score={card[slot.combo].score} setSlot={setSlot} />
             })}
             <tr>
                 <th style={{textTransform:'uppercase', width: '200px'}}>Lower Total Score</th>
