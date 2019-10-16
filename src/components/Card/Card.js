@@ -10,16 +10,8 @@ import './Card.css';
 
 const Card = props => {
 
-    // useReducer ?
+    // should we use useReducer instead ?
     const [card, setCard] = useState(cardDefinition);
-
-    const isRegionSlotsFull = (region) => {
-        return (!Object.values(card).filter(slot => slot.region === region && slot.score === null).length);
-    };
-
-    const getRegionSlots = (region) => {
-        return Object.values(card).filter(slot => slot.region === region);
-    };
 
     useEffect(() => {
         if (isRegionSlotsFull("top")) {
@@ -28,12 +20,18 @@ const Card = props => {
         if (isRegionSlotsFull("bottom")) {
             setSlot("totalBottomRows", addUpSlots("bottom"));
         }
-
         if (card.totalTopRows.score && card.totalBottomRows.score) {
             setSlot("totalGrand", card.totalTopRows.score+card.totalBottomRows.score);
         }
-
     });
+
+    const isRegionSlotsFull = (region) => {
+        return (!Object.values(card).filter(slot => slot.region === region && slot.score === null).length);
+    };
+
+    const getRegionSlots = (region) => {
+        return Object.values(card).filter(slot => slot.region === region);
+    };
 
     const addUpSlots = (region) => {
         const slots = getRegionSlots(region);
