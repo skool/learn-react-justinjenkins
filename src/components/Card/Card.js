@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
-//import { Button } from 'react-bulma-components';
+import PropTypes from 'prop-types';
 import { Table } from 'react-bulma-components';
 import CardRow from './CardRow';
 import * as combinations from '../../rules/combinations';
 
+import 'react-bulma-components/dist/react-bulma-components.min.css';
 import './Card.css';
 
 const Card = props => {
@@ -24,7 +24,9 @@ const Card = props => {
         "6": { 
             name: "Sixes", number: 6, score: null, region: "top"
         },
-        "totalTopRows": { score: null },
+        "totalTopRows": { 
+            score: null 
+        },
         "three_of_a_kind": { 
             name: "Three of a kind", combo: "three_of_a_kind", score: null, region: "bottom"
         },
@@ -46,8 +48,12 @@ const Card = props => {
         "chance": { 
             name: "Chance", combo: "chance", score: null, region: "bottom"
         },
-        "totalBottomRows": { score: null },
-        "totalGrand": { score: null },
+        "totalBottomRows": {
+            score: null
+        },
+        "totalGrand": {
+            score: null
+        },
     });
 
     const isRegionSlotsFull = (region) => {
@@ -154,6 +160,11 @@ const Card = props => {
     </div>
     );
 
+}
+
+Card.propTypes = {
+    diceOnTable: PropTypes.object.isRequired,
+    resetDice: PropTypes.func.isRequired
 }
 
 export default Card;

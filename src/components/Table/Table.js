@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Dice from '../Dice/Dice';
 import Card from '../Card/Card';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Button } from 'react-bulma-components';
 
+import 'react-bulma-components/dist/react-bulma-components.min.css';
 import './Table.css';
 
 const Table = props => {

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Dice.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiceOne,faDiceTwo,faDiceThree,faDiceFour,faDiceFive, faDiceSix } from '@fortawesome/free-solid-svg-icons'
+
+import './Dice.css';
 
 const Dice = props => {
 
