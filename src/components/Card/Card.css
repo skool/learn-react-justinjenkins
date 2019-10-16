@@ -1,1 +1,2 @@
-#card table { width: 60%; margin: auto; margin-top: 50px; margin-bottom: 100px; }
+#card table { width: 100%; margin: auto; margin-top: 50px; margin-bottom: 100px; }
+#card table thead th { text-transform: uppercase; }

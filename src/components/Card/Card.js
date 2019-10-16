@@ -70,11 +70,11 @@ const Card = props => {
         <Table className="is-bordered">
             <thead>
                 <tr>
-                <th style={{textTransform:'uppercase', width: '100px'}}>Upper Section</th>
-                <th style={{textTransform:'uppercase', width: '100px'}}>How to Score</th>
-                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center'}}>Game #1</th>
-                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center', opacity: '.25'}}>Game #2</th>
-                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center', opacity: '.25'}}>Game #3</th>        
+                <th>Upper Section</th>
+                <th style={{width: '150px'}}>How to Score</th>
+                <th style={{width: '50px', textAlign: 'center'}}>Game #1</th>
+                <th style={{width: '50px', textAlign: 'center', opacity: '.25'}}>Game #2</th>
+                <th style={{width: '50px', textAlign: 'center', opacity: '.25'}}>Game #3</th>        
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ const Card = props => {
                 return <CardRow key={slot.name} name={slot.name} number={slot.number} score={card[slot.number].score} setSlot={setSlot} />
             })}
             <tr>
-                <th style={{textTransform:'uppercase', width: '200px'}}>Upper Total Score</th>
+                <th style={{width: '200px', textTransform: 'uppercase'}}>Upper Total Score</th>
                 <td> -></td>
                 <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalTopRows.score}</td>
                 <td></td>
@@ -92,14 +92,14 @@ const Card = props => {
                 return <CardRow key={slot.name} name={slot.name} combo={slot.combo} score={card[slot.combo].score} setSlot={setSlot} />
             })}
             <tr>
-                <th style={{textTransform:'uppercase', width: '200px'}}>Lower Total Score</th>
+                <th style={{width: '200px', textTransform: 'uppercase'}}>Lower Total Score</th>
                 <td> -></td>
                 <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalBottomRows.score}</td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <th style={{textTransform:'uppercase', width: '200px'}}>Grand Total</th>
+                <th style={{width: '200px'}}>Grand Total</th>
                 <td> -></td>
                 <td style={{fontWeight:'bold', textAlign: 'center'}}>{card.totalGrand.score}</td>
                 <td></td>

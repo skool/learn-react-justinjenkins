@@ -1,10 +1,9 @@
 #table {
-    background-color: rgb(38, 38, 46);
     color: white;
-    height: 2000px;
-    width: 100%;
+    width: 90%;
     text-align: center;
     padding-top: 20px;
+    margin: auto;
 }
 
 #dice-row {
