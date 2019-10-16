@@ -7,38 +7,45 @@ export const addNumberedDice = (dice, number) => {
     return matchingDice.length ? addAllDice(matchingDice) : 0;
 };
 
-const combos = {
+export const combos = {
     "number": { 
         "points": (dice, number) => addNumberedDice(dice, number), 
         "min": 0, "match": true, "assending": false
     },
     "three_of_a_kind": { 
         "points": dice => addAllDice(dice), 
-        "min": 3, "match": true, "assending": false 
+        "min": 3, "match": true, "assending": false,
+        "howto": "Add Total of All Dice"
     },
     "four_of_a_kind": { 
         "points": dice => addAllDice(dice), 
-        "min": 4, "match": true, "assending": false 
+        "min": 4, "match": true, "assending": false,
+        "howto": "Add Total of All Dice"
     },
     "full_house": { 
         "points": dice => 25, 
-        "min": 2, "match": true, "assending": false 
+        "min": 2, "match": true, "assending": false,
+        "howto": "[Score 25] Double & 3 of a kind"
     },
     "small_straight": { 
         "points": dice => 30, 
-        "min": 4, "match": false, "assending": true 
+        "min": 4, "match": false, "assending": true,
+        "howto": "[Score 30] Sequence of 4"
     },
     "large_straight": { 
         "points": dice => 40, 
-        "min": 5, "match": false, "assending": true 
+        "min": 5, "match": false, "assending": true,
+        "howto": "[Score 40] Sequence of 5" 
     },
     "yahtzee": { 
         "points": dice => 50, 
-        "min": 5, "match": true, "assending": false 
+        "min": 5, "match": true, "assending": false,
+        "howto": "[Score 50] 5 of a Kind" 
     },
     "chance": { 
         "points": dice => addAllDice(dice), 
-        "min": 0, "match": false, "assending": false
+        "min": 0, "match": false, "assending": false,
+        "howto": "Add Total of All Dice"
     },
 };
 

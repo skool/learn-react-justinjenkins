@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'react-bulma-components';
 import CardRow from './CardRow';
+import { cardDefinition } from './cardDefinition';
+import { Table } from 'react-bulma-components';
 import * as combinations from '../../rules/combinations';
 
 import 'react-bulma-components/dist/react-bulma-components.min.css';
@@ -10,51 +11,7 @@ import './Card.css';
 const Card = props => {
 
     // useReducer ?
-    const [card, setCard] = useState({
-        "1": { 
-            name: "Aces", number: 1, score: null, region: "top" },
-        "2": { 
-            name: "Deuces", number: 2, score: null, region: "top" },
-        "3": { 
-            name: "Threes", number: 3, score: null, region: "top" },
-        "4": { 
-            name: "Fours", number: 4, score: null, region: "top" },
-        "5": { 
-            name: "Fives", number: 5, score: null, region: "top" },
-        "6": { 
-            name: "Sixes", number: 6, score: null, region: "top"
-        },
-        "totalTopRows": { 
-            score: null 
-        },
-        "three_of_a_kind": { 
-            name: "Three of a kind", combo: "three_of_a_kind", score: null, region: "bottom"
-        },
-        "four_of_a_kind": { 
-            name: "Four of a kind", combo: "four_of_a_kind", score: null, region: "bottom"
-        },
-        "full_house": { 
-            name: "Full House", combo: "full_house", score: null, region: "bottom"
-        },
-        "small_straight": { 
-            name: "Small Straight", combo: "small_straight", score: null, region: "bottom"
-        },
-        "large_straight": { 
-            name: "Large Straight", combo: "large_straight", score: null, region: "bottom"
-        },
-        "yahtzee": { 
-            name: "Yahtzee", combo: "yahtzee", score: null, region: "bottom"
-        },
-        "chance": { 
-            name: "Chance", combo: "chance", score: null, region: "bottom"
-        },
-        "totalBottomRows": {
-            score: null
-        },
-        "totalGrand": {
-            score: null
-        },
-    });
+    const [card, setCard] = useState(cardDefinition);
 
     const isRegionSlotsFull = (region) => {
         return (!Object.values(card).filter(slot => slot.region === region && slot.score === null).length);
@@ -85,11 +42,10 @@ const Card = props => {
         return total;
     };
 
-    const diceSet = (diceOnTable) => {
+    const getDiceOrdered = (diceOnTable) => {
         return Object.values(diceOnTable).map(dice => dice.number).sort();
     };
 
-    // rename section to `slot` ?
     const setSlot = (slot, score) => {
         if (card[slot].score === null) {
             score = (score ? score : getScore(slot));
@@ -104,7 +60,7 @@ const Card = props => {
     }
 
     const getScore = (slot) => {
-        const dice = diceSet(props.diceOnTable);
+        const dice = getDiceOrdered(props.diceOnTable);
         return isNaN(slot) ? combinations.determinePoints(slot, dice) : combinations.determinePoints("number", dice, slot);
     }
 
@@ -113,16 +69,14 @@ const Card = props => {
 
     return (
     <div id="card">
-        <h2>My Card</h2>
-
         <Table className="is-bordered">
             <thead>
                 <tr>
                 <th style={{textTransform:'uppercase', width: '100px'}}>Upper Section</th>
                 <th style={{textTransform:'uppercase', width: '100px'}}>How to Score</th>
                 <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center'}}>Game #1</th>
-                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center'}}>Game #2</th>
-                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center'}}>Game #3</th>        
+                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center', opacity: '.25'}}>Game #2</th>
+                <th style={{textTransform:'uppercase', width: '50px', textAlign: 'center', opacity: '.25'}}>Game #3</th>        
                 </tr>
             </thead>
             <tbody>

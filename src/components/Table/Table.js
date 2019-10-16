@@ -81,7 +81,7 @@ const Table = props => {
                 return <Dice id={dice.id} key={dice.id} number={diceOnTable[dice.id].number} handleFreezeDice={handleFreezeDice} frozen={diceOnTable[dice.id].frozen} />
             })}
         </div>
-        <p><Button size="large" outlined onClick={handleRollDice}>roll</Button></p>
+        <div><Button size="large" color="info" onClick={handleRollDice}>Roll Dice</Button></div>
         <Card diceOnTable={diceOnTable} resetDice={resetDice} />
     </div>
     );

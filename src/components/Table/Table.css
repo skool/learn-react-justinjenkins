@@ -4,10 +4,11 @@
     height: 2000px;
     width: 100%;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
 #dice-row {
     width: 70%;
     margin: auto;
+    margin-bottom: -20px;
 }
