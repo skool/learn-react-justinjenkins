@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Dice from '../Dice/Dice';
+import DiceRolling from '../Dice/DiceRolling';
 import Card from '../Card/Card';
 import { Button } from 'react-bulma-components';
 
@@ -19,10 +20,11 @@ const Table = props => {
     });
 
     const [rollCount, setRollCount] = useState(1);
+    const [cardLocked, setCardLocked] = useState(true);
 
-    const getHotDice = () => {
+    const getHotDice = useCallback(() => {
         return Object.values(diceOnTable).filter(dice => dice.frozen === false);
-    };
+    }, [diceOnTable]);
 
     const handleRollDice = (e) => {
         if (rollCount < 3) {
@@ -33,6 +35,7 @@ const Table = props => {
             Object.values(diceOnTable).forEach((dice) => {
                 handleFreezeDice(dice.id);
             });
+            //setCardLocked(false);
             setRollCount(0);
         }
     };
@@ -55,26 +58,38 @@ const Table = props => {
     };
 
     const handleFreezeDice = (id) => {
-        freezeDice(id,true);
+        if (rollCount === 0 || rollCount === 2) {
+            freezeDice(id, true);
+        } else {
+            freezeDice(id);
+        }
     };
 
-    const freezeDice = (id, state) => {
+    const freezeDice = (id, freeze) => {
+        const diceTemp = freeze !== undefined ? freeze : !diceOnTable[id].frozen;
         setDice((prevState) => {
-            return { ...prevState, [id]: Object.assign(prevState[id], { frozen: state })  }
+            return { ...prevState, [id]: Object.assign(prevState[id], { frozen: diceTemp })  }
         });
     };
 
     const resetDice = () => {
         Object.values(diceOnTable).forEach((dice) => {
             freezeDice(dice.id, false);
+            rollDice(dice.id);
         });
     };
 
     const theDice = Object.values(diceOnTable);
 
+    useEffect(() => {
+        if (getHotDice().length === 0) {
+            setCardLocked(false);
+        }
+    },[getHotDice]);
+
     return (
     <div id="table">
-        <h1>Yahtzee!</h1>
+        <h1>Yahtzee! <DiceRolling spin={true} /></h1>
         <div id="dice-row">
             {theDice.map(dice => {
                 // uses the dice in state to generate
@@ -86,7 +101,7 @@ const Table = props => {
             <Button size="large" color="info" onClick={handleRollDice}>Roll Dice</Button> : <h2>Choose a score slot below</h2>
         }
         </div>
-        <Card diceOnTable={diceOnTable} resetDice={resetDice} />
+        <Card diceOnTable={diceOnTable} resetDice={resetDice} locked={cardLocked} lockCard={setCardLocked} />
     </div>
     );
 

@@ -7,15 +7,16 @@ const CardRow = props => {
 
     const slotName = () => { return props.number ? props.number : props.combo };
     const howTo = () => { return props.combo ? combos[props.combo].howto : "Count and Add only " + props.name; }
+    const diceIconClick = () => {};
 
     return (    
         <tr style={props.style}>
         <th style={{width: '50px'}}><span style={{width: '120px', display: 'inline-block'}}>{props.name}</span> 
-        {props.number ? <Dice style={{lineHeight: '15px', height: '25px'}} number={props.number} /> : ""} </th>
-        <td style={{fontSize: "12px"}}>{howTo()}</td>
-        <td style={{textAlign: "center"}} onClick={() => props.setSlot(slotName())}>{props.score}</td>
-        <td style={{textAlign: "center", opacity: '.25'}}></td>
-        <td style={{textAlign: "center", opacity: '.25'}}></td>
+        {props.number ? <Dice handleFreezeDice={diceIconClick} size="lg" number={props.number} /> : ""} </th>
+        <td>{howTo()}</td>
+        <td className="slot" onClick={() => props.setSlot(slotName())}>{props.score}</td>
+        <td className="slot off"></td>
+        <td className="slot off"></td>
         </tr>
     );
 

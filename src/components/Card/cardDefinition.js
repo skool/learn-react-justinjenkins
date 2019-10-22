@@ -1,18 +1,26 @@
 export const cardDefinition = {
     "1": { 
-        name: "Aces", number: 1, score: null, region: "top" },
+        name: "Aces", number: 1, score: null, region: "top" 
+    },
     "2": { 
-        name: "Deuces", number: 2, score: null, region: "top" },
+        name: "Deuces", number: 2, score: null, region: "top" 
+    },
     "3": { 
-        name: "Threes", number: 3, score: null, region: "top" },
+        name: "Threes", number: 3, score: null, region: "top" 
+    },
     "4": { 
-        name: "Fours", number: 4, score: null, region: "top" },
+        name: "Fours", number: 4, score: null, region: "top" 
+    },
     "5": { 
-        name: "Fives", number: 5, score: null, region: "top" },
+        name: "Fives", number: 5, score: null, region: "top" 
+    },
     "6": { 
         name: "Sixes", number: 6, score: null, region: "top"
     },
     "totalTopRows": { 
+        score: null 
+    },
+    "totalTopRowsPlusBonus": { 
         score: null 
     },
     "three_of_a_kind": { 
