@@ -20,6 +20,9 @@ export const cardDefinition = {
     "totalTopRows": { 
         score: null 
     },
+    "topRowsBonus": { 
+        score: null 
+    },
     "totalTopRowsPlusBonus": { 
         score: null 
     },

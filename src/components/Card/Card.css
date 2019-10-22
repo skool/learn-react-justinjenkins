@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+
 #card table { width: 100%; margin: auto; margin-top: 50px; margin-bottom: 100px; }
 #card table thead th { text-transform: uppercase; }
 
 #card td { font-size: 12px; line-height: 18px; }
-#card td.slot { font-size: 18px; text-align: center; margin: auto; }
+#card td.slot { font-size: 22px; text-align: center; margin: auto; font-family: "Gochi Hand"; }
 #card td.slot.open { border: 1px solid lightcoral; border-collapse: collapse; }
 #card td.slot.score { font-weight: bold; }
 #card td.slot.score.sub { color: #bfbfbf; }

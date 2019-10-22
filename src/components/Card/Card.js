@@ -24,8 +24,10 @@ const Card = props => {
 
             if (slotsTotal > 62) {
                 setSlot("totalTopRowsPlusBonus", slotsTotal+35, true);
+                setSlot("topRowsBonus", 35, true)
             } else {
                 setSlot("totalTopRowsPlusBonus", slotsTotal, true);
+                setSlot("topRowsBonus", "-", true);
             }
         }
         if (isRegionSlotsFull("bottom")) {
@@ -104,7 +106,7 @@ const Card = props => {
             <tr>
                 <th style={{width: '200px', textTransform: 'uppercase'}}>Bonus</th>
                 <td>[Score 35] If total score is 63 or over</td>
-                <td className="slot score bonus">{card.totalTopRows.score > 62 ? 35 : ""}</td>
+                <td className="slot score">{card.topRowsBonus.score}</td>
                 <td></td>
                 <td></td>
             </tr>
