@@ -1,49 +1,50 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDiceOne,faDiceTwo,faDiceThree,faDiceFour,faDiceFive, faDiceSix } from '@fortawesome/free-solid-svg-icons'
+import { faDiceOne,faDiceTwo,faDiceThree,faDiceFour,faDiceFive, faDiceSix, faIcicles } from '@fortawesome/free-solid-svg-icons'
 
 import './Dice.css';
 
-const Dice = props => {
+const Dice = ({ frozen, handleFreezeDice, style, id, number, size, spin }) => {
+
+    // pulse
 
     const dice = [
-        <FontAwesomeIcon icon={faDiceOne} />,
-        <FontAwesomeIcon icon={faDiceTwo} />,
-        <FontAwesomeIcon icon={faDiceThree} />,
-        <FontAwesomeIcon icon={faDiceFour} />,
-        <FontAwesomeIcon icon={faDiceFive} />,
-        <FontAwesomeIcon icon={faDiceSix} />,
+        <FontAwesomeIcon icon={faDiceOne} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
+        <FontAwesomeIcon icon={faDiceTwo} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
+        <FontAwesomeIcon icon={faDiceThree} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
+        <FontAwesomeIcon icon={faDiceFour} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
+        <FontAwesomeIcon icon={faDiceFive} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
+        <FontAwesomeIcon icon={faDiceSix} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
     ]
 
     const getDice = (number) => {
         return dice[number-1];
     }
 
-    const diceStateClass = (frozen) => {
-        if (frozen) {
-            return "frozen";
-        }
-        return "";
-    }; 
-
-    const handleFreezeDice = (func, id) => {
-        return func ? func(id) : "";
-    };
+    const onDiceClick = useCallback(() => {
+        handleFreezeDice(id)
+    }, [handleFreezeDice, id]);
 
     return (
-    <div id={props.id} className={`dice ${diceStateClass(props.frozen)}`} style={props.style} 
-        onClick={() => handleFreezeDice(props.handleFreezeDice, props.id)} >
-        {getDice(props.number)}
-    </div>
+        <span id={id} className="fa-layers fa-fw" style={style} onClick={onDiceClick}>
+            {getDice(number, frozen)}
+            {frozen ? <FontAwesomeIcon icon={faIcicles} className="icicle" transform="shrink-3 up-0.5" /> : ""}
+        </span>
     );
 
 }
+
+Dice.defaultProps = {
+    spin: false
+};
 
 Dice.propTypes = {
     frozen: PropTypes.bool,
     handleFreezeDice: PropTypes.func,
     number: PropTypes.number.isRequired,
-}
+    size: PropTypes.string,
+    //spin: PropTypes.bool,
+};
 
 export default Dice;
