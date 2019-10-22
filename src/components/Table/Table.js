@@ -89,7 +89,7 @@ const Table = props => {
 
     return (
     <div id="table">
-        <h1>Yahtzee! <DiceRolling spin={true} /></h1>
+        <h1>Yahtzee! <DiceRolling /></h1>
         <div id="dice-row">
             {theDice.map(dice => {
                 // uses the dice in state to generate

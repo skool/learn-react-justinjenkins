@@ -7,8 +7,6 @@ import './Dice.css';
 
 const Dice = ({ frozen, handleFreezeDice, style, id, number, size, spin }) => {
 
-    // pulse
-
     const dice = [
         <FontAwesomeIcon icon={faDiceOne} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
         <FontAwesomeIcon icon={faDiceTwo} className={frozen ? "dice frozen" : "dice"} size={size} spin={spin ? true : false} />,
@@ -44,7 +42,7 @@ Dice.propTypes = {
     handleFreezeDice: PropTypes.func,
     number: PropTypes.number.isRequired,
     size: PropTypes.string,
-    //spin: PropTypes.bool,
+    spin: PropTypes.bool,
 };
 
 export default Dice;
