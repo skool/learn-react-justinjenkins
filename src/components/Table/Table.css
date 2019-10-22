@@ -14,6 +14,12 @@
     font-size: 6rem;
 }
 
+#roll-button-row {
+    width: 70%;
+    margin: auto;
+    height: 50px;
+}
+
 #dice-row span {
     width: 1.0em;
 }
