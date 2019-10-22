@@ -1,5 +1,5 @@
+/*
 .dice {
-    color: black;
     height: auto; 
     width: 15%; 
     display: inline-block; 
@@ -10,16 +10,18 @@
     font-weight: bold;
     padding: 0px;
 }
-
+*/
 .dice.frozen {
-    opacity: 0.5;
+    color: #2d7aad;
+    opacity: .75;
 }
-
+/*
 .dice svg {
     width: 100% !important;
     height: 100%;        
 }
-
-#dice-row .dice svg {
-    filter: invert(100%);
+*/
+.icicle {
+    color: #42c8f5;
+    opacity: .65;
 }
