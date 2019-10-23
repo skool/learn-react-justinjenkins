@@ -33,10 +33,8 @@ const Table = props => {
         }
         if (rollCount === 2) {
             Object.values(diceOnTable).forEach((dice) => {
-                handleFreezeDice(dice.id);
-            });
-            //setCardLocked(false);
-            setRollCount(0);
+                freezeDice(dice.id, true);
+            });       
         }
     };
 
@@ -58,10 +56,10 @@ const Table = props => {
     };
 
     const handleFreezeDice = (id) => {
-        if (rollCount === 0 || rollCount === 2) {
-            freezeDice(id, true);
-        } else {
+        if (rollCount === 1 || rollCount === 2) {
             freezeDice(id);
+        } else if (rollCount === 0) {
+            freezeDice(id, true);
         }
     };
 
@@ -77,6 +75,7 @@ const Table = props => {
             freezeDice(dice.id, false);
             rollDice(dice.id);
         });
+        setRollCount(1);
     };
 
     const theDice = Object.values(diceOnTable);
