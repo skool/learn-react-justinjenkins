@@ -93,12 +93,14 @@ const getUniques = (dice) => {
 
     const diceGrouped = groupDice(dice);
 
-    const uniques = diceGrouped.filter((d) => {
-        if (d.count>1) { return false; }
-        return true;
-    });
+    const onlyUniques = d => {
+        if (d.count >= 1) { return true; }
+        return false;
+    };
 
-   return uniques;
+    const uniques = diceGrouped.filter(onlyUniques);
+
+    return uniques.map(dice => dice.id);
 
 }
 
@@ -166,7 +168,7 @@ const straight = (dice, number) => {
     
     if (number === 5 && !ofAKind(dice,2)) { return true; }
     if (number === 4 && !ofAKind(dice,3) && getMatches(dice).length <= 1) { 
-        const uniqueDice = getUniques(dice).map(dice => dice.id);
+        const uniqueDice = getUniques(dice);
         return isConsecutive(uniqueDice);
     }
 

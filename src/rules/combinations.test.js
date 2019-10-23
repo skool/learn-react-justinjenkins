@@ -40,8 +40,23 @@ it('🎲  small', () => {
   expect(small_straight).toBe(30);
 });
 
+it('🎲  small', () => {
+  const small_straight = determinePoints("small_straight", [1,2,2,3,4]);
+  expect(small_straight).toBe(30);
+});
+
+it('🎲  small', () => {
+  const small_straight = determinePoints("small_straight", [1,2,3,4,5]);
+  expect(small_straight).toBe(30);
+});
+
 it('🎲  NOT small', () => {
   const small_straight = determinePoints("small_straight", [1,2,4,4,6]);
+  expect(small_straight).toBe(0);
+});
+
+it('🎲  NOT small', () => {
+  const small_straight = determinePoints("small_straight", [1,2,3,5,6]);
   expect(small_straight).toBe(0);
 });
 
