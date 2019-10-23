@@ -13,7 +13,7 @@
 */
 .dice.frozen {
     color: #2d7aad;
-    opacity: .75;
+    opacity: .95;
 }
 /*
 .dice svg {
@@ -23,5 +23,5 @@
 */
 .icicle {
     color: #42c8f5;
-    opacity: .65;
+    opacity: .30;
 }
