@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import Dice from '../Dice/Dice';
+import DiceSet from '../Dice/DiceSet';
 import DiceRolling from '../Dice/DiceRolling';
 import Card from '../Card/Card';
 import { Button } from 'react-bulma-components';
@@ -21,6 +21,8 @@ const Table = props => {
 
     const [rollCount, setRollCount] = useState(1);
     const [cardLocked, setCardLocked] = useState(true);
+    const [secondsRolling, setSecondsRolling] = useState(0);
+    const [diceAreRolling, setDiceAreRolling] = useState(false);
 
     const getHotDice = useCallback(() => {
         return Object.values(diceOnTable).filter(dice => dice.frozen === false);
@@ -39,6 +41,7 @@ const Table = props => {
     };
 
     const rollDice = (id) => {
+        setDiceAreRolling(true);
         if (typeof id !== 'undefined') {
             setDice((prevState) => {
                 return { ...prevState, [id]: Object.assign(prevState[id], { number: randomDiceNumber() })  }
@@ -78,23 +81,24 @@ const Table = props => {
         setRollCount(1);
     };
 
-    const theDice = Object.values(diceOnTable);
-
     useEffect(() => {
         if (getHotDice().length === 0) {
             setCardLocked(false);
         }
-    },[getHotDice]);
+        if  (diceAreRolling) {
+            let interval = setInterval(() => {
+                setSecondsRolling(seconds => seconds + 1);
+            },1000)
+
+            return () => { setDiceAreRolling(false); clearInterval(interval) };
+        }
+
+    },[getHotDice, secondsRolling, diceAreRolling]);
 
     return (
     <div id="table">
         <h1>Yahtzee! <DiceRolling /></h1>
-        <div id="dice-row">
-            {theDice.map(dice => {
-                // uses the dice in state to generate
-                return <Dice id={dice.id} key={dice.id} number={diceOnTable[dice.id].number} handleFreezeDice={handleFreezeDice} frozen={diceOnTable[dice.id].frozen} />
-            })}
-        </div>
+        <DiceSet diceOnTable={diceOnTable} handleFreezeDice={handleFreezeDice} rolling={diceAreRolling} />
         <div id="roll-button-row">
         {getHotDice().length ?
             <Button size="large" color="info" onClick={handleRollDice}>Roll Dice</Button> : <h2>Choose a score slot below</h2>

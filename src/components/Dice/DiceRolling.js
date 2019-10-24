@@ -6,15 +6,15 @@ const DiceRolling = props => {
 
     const [seconds, setSeconds] = useState(1);
 
+    // this still needs to get a random number if not spinning
+    // also does this work correctly?
     useEffect(() => {
-        if (props.spin) {
-            let interval = setInterval(() => {
-                setSeconds(seconds => seconds + 1);
-            },150)
+        let interval = setInterval(() => {
+            setSeconds(seconds => seconds + 1);
+        },150)
 
-            return () => clearInterval(interval);
-        }
-    }, [props.spin,seconds]);
+        return () => clearInterval(interval);
+    }, [seconds]);
 
     const randomDiceNumber = () => { return Math.floor(Math.random() * 6) + 1; };
 
