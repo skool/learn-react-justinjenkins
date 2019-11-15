@@ -61,7 +61,7 @@ export const determinePoints = (type, dice, number) => {
         (type === "large_straight" && straight(dice, combos.large_straight.min)) ||
         (type === "three_of_a_kind" && ofAKind(dice,combos.three_of_a_kind.min)) ||
         (type === "four_of_a_kind" && ofAKind(dice, combos.four_of_a_kind.min)) ||
-        (type === "yahtzee" && yahtzee(dice)) ||
+        (type === "yahtzee" && ofAKind(dice, combos.yahtzee.min)) ||
         (type === "chance") || 
         (type === "number" && number)
     ){
@@ -136,13 +136,6 @@ const ofAKind = (dice, min) => {
     if (matches && matches.filter(d => d.count >= min).length) {
         return true;
     }
-
-    return false;
-}
-
-const yahtzee = (dice) => {
-
-    if (ofAKind(dice,5)) { return true; }
 
     return false;
 }

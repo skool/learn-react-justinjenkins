@@ -42,7 +42,7 @@ export const cardDefinition = {
         name: "Large Straight", combo: "large_straight", score: null, region: "bottom"
     },
     "yahtzee": { 
-        name: "Yahtzee", combo: "yahtzee", score: null, region: "bottom"
+        name: "🛥zee", combo: "yahtzee", score: null, region: "bottom"
     },
     "chance": { 
         name: "Chance", combo: "chance", score: null, region: "bottom"

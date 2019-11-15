@@ -97,7 +97,7 @@ const Table = props => {
 
     return (
     <div id="table">
-        <h1>Yahtzee! <DiceRolling /></h1>
+        <h1>🛥zee! <DiceRolling /></h1>
         <DiceSet diceOnTable={diceOnTable} handleFreezeDice={handleFreezeDice} rolling={diceAreRolling} />
         <div id="roll-button-row">
         {getHotDice().length ?
